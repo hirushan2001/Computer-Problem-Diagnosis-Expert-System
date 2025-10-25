@@ -111,5 +111,97 @@
       "symptom": "no_sound",
       "device_detected": "no"
     }
+  },
+  {
+    "timestamp": "2025-10-25T22:34:37.784593",
+    "diagnosis": "General Computer Issue - Basic Troubleshooting",
+    "solution": "1. Restart computer\n2. Check all physical connections\n3. Run Windows Update\n4. Update all drivers\n5. Run antivirus scan\n6. Check Event Viewer for errors\n7. Run SFC /scannow\n8. Check Task Manager for resource usage\n9. Clean temp files\n10. Check for overheating",
+    "severity": "low",
+    "facts": {
+      "issue_category": "application",
+      "symptom": "wont_install"
+    }
+  },
+  {
+    "timestamp": "2025-10-25T22:51:30.497472",
+    "diagnosis": "General Computer Issue - Basic Troubleshooting",
+    "solution": "1. Restart computer\n2. Check all physical connections\n3. Run Windows Update\n4. Update all drivers\n5. Run antivirus scan\n6. Check Event Viewer for errors\n7. Run SFC /scannow\n8. Check Task Manager for resource usage\n9. Clean temp files\n10. Check for overheating",
+    "severity": "low",
+    "facts": {
+      "issue_category": "network",
+      "symptom": "no_internet",
+      "other_devices": "working"
+    }
+  },
+  {
+    "timestamp": "2025-10-25T22:52:09.012725",
+    "diagnosis": "General Computer Issue - Basic Troubleshooting",
+    "solution": "1. Restart computer\n2. Check all physical connections\n3. Run Windows Update\n4. Update all drivers\n5. Run antivirus scan\n6. Check Event Viewer for errors\n7. Run SFC /scannow\n8. Check Task Manager for resource usage\n9. Clean temp files\n10. Check for overheating",
+    "severity": "low",
+    "facts": {
+      "power_status": "not_turning_on",
+      "power_cable": "connected",
+      "outlet_working": "yes",
+      "lights": "none"
+    }
+  },
+  {
+    "timestamp": "2025-10-25T22:55:20.415702",
+    "diagnosis": "General Computer Issue - Basic Troubleshooting",
+    "solution": "1. Restart computer\n2. Check all physical connections\n3. Run Windows Update\n4. Update all drivers\n5. Run antivirus scan\n6. Check Event Viewer for errors\n7. Run SFC /scannow\n8. Check Task Manager for resource usage\n9. Clean temp files\n10. Check for overheating",
+    "severity": "low",
+    "facts": {
+      "power_status": "not_turning_on",
+      "power_cable": "connected",
+      "outlet_working": "yes",
+      "lights": "none"
+    }
+  },
+  {
+    "timestamp": "2025-10-25T23:01:20.095527",
+    "diagnosis": "General Computer Issue - Basic Troubleshooting",
+    "solution": "1. Restart computer\n2. Check all physical connections\n3. Run Windows Update\n4. Update all drivers\n5. Run antivirus scan\n6. Check Event Viewer for errors\n7. Run SFC /scannow\n8. Check Task Manager for resource usage\n9. Clean temp files\n10. Check for overheating",
+    "severity": "low",
+    "facts": {
+      "power_status": "not_turning_on",
+      "power_cable": "connected",
+      "outlet_working": "yes",
+      "lights": "none"
+    }
+  },
+  {
+    "timestamp": "2025-10-25T23:13:48.024096",
+    "diagnosis": "Power Supply Unit (PSU) Failure",
+    "solution": "1. Check if PSU fan spins\n2. Test with PSU tester\n3. Replace PSU if confirmed dead\n4. Check power button connection to motherboard\n5. Verify PSU switch is ON",
+    "severity": "high",
+    "facts": {
+      "power_status": "not_turning_on",
+      "power_cable": "connected",
+      "outlet_working": "yes",
+      "lights": "none"
+    }
+  },
+  {
+    "timestamp": "2025-10-25T23:14:45.089721",
+    "diagnosis": "Failing Hard Drive",
+    "solution": "1. BACKUP DATA IMMEDIATELY!\n2. Check SMART status with CrystalDiskInfo\n3. Run CHKDSK /F /R (may take hours)\n4. Replace drive urgently\n5. Consider cloning to SSD\n6. Check for clicking sounds (mechanical failure)",
+    "severity": "critical",
+    "facts": {
+      "issue_category": "performance",
+      "symptom": "very_slow",
+      "disk_type": "hdd",
+      "disk_health": "poor"
+    }
+  },
+  {
+    "timestamp": "2025-10-25T23:15:29.094545",
+    "diagnosis": "Router or ISP Problem",
+    "solution": "1. Power cycle modem and router (30 sec off)\n2. Check all cable connections\n3. Verify ISP service status online\n4. Check router admin panel for issues\n5. Try direct modem connection\n6. Reset router to factory settings (last resort)\n7. Contact ISP if problem persists",
+    "severity": "medium",
+    "facts": {
+      "issue_category": "network",
+      "symptom": "no_internet",
+      "other_devices": "not_working"
+    }
   }
 ]

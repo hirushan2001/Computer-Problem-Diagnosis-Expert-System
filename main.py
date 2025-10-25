@@ -6,10 +6,12 @@ Author: IT Student
 Date: October 2024
 """
 
-from knowledge_base import ComputerDiagnosisSystem, save_diagnosis, Fact
+from knowledge_base import ComputerDiagnosisSystem, save_diagnosis
+from experta import Fact
 from datetime import datetime
 import sys
 import os
+
 
 class DiagnosisInterface:
     def __init__(self):
@@ -286,7 +288,7 @@ class DiagnosisInterface:
         )
         
         if error != "Other/Don't know":
-            self.user_facts['error_code'] = error.replace("_", "_")
+            self.user_facts['error_code'] = error
         
         # Run engine
         self.engine.reset()

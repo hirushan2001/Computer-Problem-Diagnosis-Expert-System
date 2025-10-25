@@ -1,20 +1,19 @@
-"""Compatibility shim: some older packages expect names like
-Mapping on the `collections` module (removed in Python 3.10).
-Map the common ABC names from `collections.abc` onto `collections`
-before importing `experta` so downstream packages (frozendict/experta)
-continue to work under newer Python versions.
 """
+Computer Problem Diagnosis Expert System - Knowledge Base
+Compatibility shim for Python 3.10+
+"""
+
+# Fix for Python 3.10+ compatibility with experta
 import collections
 import collections.abc as _collections_abc
 
-# Backwards-compatibility: some packages import Mapping from
-# `collections` (deprecated/removed). Provide aliases if missing.
 for name in ("Mapping", "MutableMapping", "Sequence", "Iterable"):
     if not hasattr(collections, name):
         setattr(collections, name, getattr(_collections_abc, name))
 
 from experta import *
 import json
+
 
 class ComputerDiagnosisSystem(KnowledgeEngine):
     """Expert System for Computer Problem Diagnosis"""
@@ -510,14 +509,15 @@ class ComputerDiagnosisSystem(KnowledgeEngine):
     
     # ==================== DEFAULT CATCH-ALL ====================
     
-    @Rule(Fact(action='diagnose'),
-          NOT(Fact(diagnosis_result=W())))
+    @Rule(Fact(action='diagnose'))
     def general_troubleshooting(self):
-        self.diagnosis_result = {
-            'diagnosis': 'General Computer Issue - Basic Troubleshooting',
-            'solution': '1. Restart computer\n2. Check all physical connections\n3. Run Windows Update\n4. Update all drivers\n5. Run antivirus scan\n6. Check Event Viewer for errors\n7. Run SFC /scannow\n8. Check Task Manager for resource usage\n9. Clean temp files\n10. Check for overheating',
-            'severity': 'low'
-        }
+        """Catch-all rule with lowest priority"""
+        if not self.diagnosis_result:
+            self.diagnosis_result = {
+                'diagnosis': 'General Computer Issue - Basic Troubleshooting',
+                'solution': '1. Restart computer\n2. Check all physical connections\n3. Run Windows Update\n4. Update all drivers\n5. Run antivirus scan\n6. Check Event Viewer for errors\n7. Run SFC /scannow\n8. Check Task Manager for resource usage\n9. Clean temp files\n10. Check for overheating',
+                'severity': 'low'
+            }
 
 
 def save_diagnosis(diagnosis_data):
