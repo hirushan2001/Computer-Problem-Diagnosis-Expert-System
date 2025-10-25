@@ -1,0 +1,115 @@
+[
+  {
+    "timestamp": "2025-10-25T12:51:34.510359",
+    "diagnosis": "General Computer Issue - Basic Troubleshooting",
+    "solution": "1. Restart computer\n2. Check all physical connections\n3. Run Windows Update\n4. Update all drivers\n5. Run antivirus scan\n6. Check Event Viewer for errors\n7. Run SFC /scannow\n8. Check Task Manager for resource usage\n9. Clean temp files\n10. Check for overheating",
+    "severity": "low",
+    "facts": {
+      "issue_category": "storage",
+      "symptom": "disk_full"
+    }
+  },
+  {
+    "timestamp": "2025-10-25T12:51:53.639403",
+    "diagnosis": "General Computer Issue - Basic Troubleshooting",
+    "solution": "1. Restart computer\n2. Check all physical connections\n3. Run Windows Update\n4. Update all drivers\n5. Run antivirus scan\n6. Check Event Viewer for errors\n7. Run SFC /scannow\n8. Check Task Manager for resource usage\n9. Clean temp files\n10. Check for overheating",
+    "severity": "low",
+    "facts": {
+      "issue_category": "storage",
+      "symptom": "disk_full"
+    }
+  },
+  {
+    "timestamp": "2025-10-25T12:52:34.953155",
+    "diagnosis": "General Computer Issue - Basic Troubleshooting",
+    "solution": "1. Restart computer\n2. Check all physical connections\n3. Run Windows Update\n4. Update all drivers\n5. Run antivirus scan\n6. Check Event Viewer for errors\n7. Run SFC /scannow\n8. Check Task Manager for resource usage\n9. Clean temp files\n10. Check for overheating",
+    "severity": "low",
+    "facts": {
+      "issue_category": "storage",
+      "symptom": "disk_full"
+    }
+  },
+  {
+    "timestamp": "2025-10-25T12:52:52.197219",
+    "diagnosis": "General Computer Issue - Basic Troubleshooting",
+    "solution": "1. Restart computer\n2. Check all physical connections\n3. Run Windows Update\n4. Update all drivers\n5. Run antivirus scan\n6. Check Event Viewer for errors\n7. Run SFC /scannow\n8. Check Task Manager for resource usage\n9. Clean temp files\n10. Check for overheating",
+    "severity": "low",
+    "facts": {
+      "issue_category": "storage",
+      "symptom": "disk_full"
+    }
+  },
+  {
+    "timestamp": "2025-10-25T13:00:20.615014",
+    "diagnosis": "General Computer Issue - Basic Troubleshooting",
+    "solution": "1. Restart computer\n2. Check all physical connections\n3. Run Windows Update\n4. Update all drivers\n5. Run antivirus scan\n6. Check Event Viewer for errors\n7. Run SFC /scannow\n8. Check Task Manager for resource usage\n9. Clean temp files\n10. Check for overheating",
+    "severity": "low",
+    "facts": {
+      "power_status": "not_turning_on",
+      "power_cable": "connected",
+      "outlet_working": "yes",
+      "lights": "on",
+      "display": "no_signal"
+    }
+  },
+  {
+    "timestamp": "2025-10-25T14:20:59.737711",
+    "diagnosis": "General Computer Issue - Basic Troubleshooting",
+    "solution": "1. Restart computer\n2. Check all physical connections\n3. Run Windows Update\n4. Update all drivers\n5. Run antivirus scan\n6. Check Event Viewer for errors\n7. Run SFC /scannow\n8. Check Task Manager for resource usage\n9. Clean temp files\n10. Check for overheating",
+    "severity": "low",
+    "facts": {
+      "issue_category": "storage",
+      "symptom": "disk_full"
+    }
+  },
+  {
+    "timestamp": "2025-10-25T14:21:15.490561",
+    "diagnosis": "General Computer Issue - Basic Troubleshooting",
+    "solution": "1. Restart computer\n2. Check all physical connections\n3. Run Windows Update\n4. Update all drivers\n5. Run antivirus scan\n6. Check Event Viewer for errors\n7. Run SFC /scannow\n8. Check Task Manager for resource usage\n9. Clean temp files\n10. Check for overheating",
+    "severity": "low",
+    "facts": {
+      "issue_category": "storage",
+      "symptom": "disk_full"
+    }
+  },
+  {
+    "timestamp": "2025-10-25T14:21:39.402983",
+    "diagnosis": "General Computer Issue - Basic Troubleshooting",
+    "solution": "1. Restart computer\n2. Check all physical connections\n3. Run Windows Update\n4. Update all drivers\n5. Run antivirus scan\n6. Check Event Viewer for errors\n7. Run SFC /scannow\n8. Check Task Manager for resource usage\n9. Clean temp files\n10. Check for overheating",
+    "severity": "low",
+    "facts": {
+      "power_status": "turning_on",
+      "boot_stage": "bios_shows"
+    }
+  },
+  {
+    "timestamp": "2025-10-25T21:28:45.921365",
+    "diagnosis": "General Computer Issue - Basic Troubleshooting",
+    "solution": "1. Restart computer\n2. Check all physical connections\n3. Run Windows Update\n4. Update all drivers\n5. Run antivirus scan\n6. Check Event Viewer for errors\n7. Run SFC /scannow\n8. Check Task Manager for resource usage\n9. Clean temp files\n10. Check for overheating",
+    "severity": "low",
+    "facts": {
+      "issue_category": "display"
+    }
+  },
+  {
+    "timestamp": "2025-10-25T21:57:39.285435",
+    "diagnosis": "General Computer Issue - Basic Troubleshooting",
+    "solution": "1. Restart computer\n2. Check all physical connections\n3. Run Windows Update\n4. Update all drivers\n5. Run antivirus scan\n6. Check Event Viewer for errors\n7. Run SFC /scannow\n8. Check Task Manager for resource usage\n9. Clean temp files\n10. Check for overheating",
+    "severity": "low",
+    "facts": {
+      "issue_category": "performance",
+      "symptom": "very_slow"
+    }
+  },
+  {
+    "timestamp": "2025-10-25T21:59:02.412984",
+    "diagnosis": "General Computer Issue - Basic Troubleshooting",
+    "solution": "1. Restart computer\n2. Check all physical connections\n3. Run Windows Update\n4. Update all drivers\n5. Run antivirus scan\n6. Check Event Viewer for errors\n7. Run SFC /scannow\n8. Check Task Manager for resource usage\n9. Clean temp files\n10. Check for overheating",
+    "severity": "low",
+    "facts": {
+      "issue_category": "audio",
+      "symptom": "no_sound",
+      "device_detected": "no"
+    }
+  }
+]
