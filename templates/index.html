@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Diagnosis Expert System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .welcome-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .coverage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .coverage-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            font-size: 0.95em;
+        }
+
+        .question-section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-section.active {
+            display: block;
+        }
+
+        .question {
+            margin-bottom: 30px;
+        }
+
+        .question h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            padding: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1em;
+        }
+
+        .option:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            transform: translateX(10px);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+        }
+
+        .diagnosis-result {
+            display: none;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+
+        .diagnosis-result.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        .severity-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .severity-critical { background: #dc3545; color: white; }
+        .severity-high { background: #fd7e14; color: white; }
+        .severity-medium { background: #ffc107; color: #000; }
+        .severity-low { background: #28a745; color: white; }
+
+        .solution-box {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+            white-space: pre-line;
+            line-height: 1.8;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.5s;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .history-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .history-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🖥️ Computer Diagnosis Expert System</h1>
+            <p>AI-Powered Computer Problem Diagnosis</p>
+        </div>
+
+        <div class="content">
+            <!-- Welcome Section -->
+            <div id="welcomeSection" class="welcome-section">
+                <h2>Welcome! Let's diagnose your computer problem</h2>
+                <p style="color: #666; margin: 20px 0;">This expert system will guide you through a series of questions to identify and solve your computer issues.</p>
+                
+                <div class="coverage-grid">
+                    <div class="coverage-item">💻 Hardware Issues</div>
+                    <div class="coverage-item">⚡ Power & Boot</div>
+                    <div class="coverage-item">🔵 BSOD Errors</div>
+                    <div class="coverage-item">🌐 Network Problems</div>
+                    <div class="coverage-item">📱 Applications</div>
+                    <div class="coverage-item">🖨️ Peripherals</div>
+                    <div class="coverage-item">🔊 Audio Issues</div>
+                    <div class="coverage-item">🔒 Security</div>
+                    <div class="coverage-item">💾 Storage</div>
+                    <div class="coverage-item">🔄 Windows Update</div>
+                    <div class="coverage-item">🖥️ Display</div>
+                    <div class="coverage-item">🚀 Performance</div>
+                </div>
+
+                <div class="btn-container">
+                    <button class="btn" onclick="startDiagnosis()">Start Diagnosis</button>
+                    <a href="/history" class="history-link">📋 View Diagnosis History</a>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div id="progressSection" style="display: none;">
+                <div class="progress-bar">
+                    <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Question Sections -->
+            <div id="categorySection" class="question-section">
+                <div class="question">
+                    <h3>What type of issue are you experiencing?</h3>
+                    <div class="options">
+                        <div class="option" onclick="selectCategory('power_boot')">💡 Power/Boot Problems</div>
+                        <div class="option" onclick="selectCategory('performance')">🐌 Performance Issues (Slow/Freezing)</div>
+                        <div class="option" onclick="selectCategory('bsod')">🔵 Blue Screen of Death (BSOD)</div>
+                        <div class="option" onclick="selectCategory('network')">🌐 Network/Internet Problems</div>
+                        <div class="option" onclick="selectCategory('application')">📱 Application Issues</div>
+                        <div class="option" onclick="selectCategory('peripheral')">🖨️ Peripheral Devices</div>
+                        <div class="option" onclick="selectCategory('audio')">🔊 Audio/Sound Problems</div>
+                        <div class="option" onclick="selectCategory('security')">🔒 Security Concerns</div>
+                        <div class="option" onclick="selectCategory('storage')">💾 Storage/Disk Problems</div>
+                        <div class="option" onclick="selectCategory('windows_update')">🔄 Windows Update Issues</div>
+                        <div class="option" onclick="selectCategory('display')">🖥️ Display Problems</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dynamicQuestions" class="question-section"></div>
+
+            <!-- Loading -->
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p style="margin-top: 20px;">Analyzing your problem...</p>
+            </div>
+
+            <!-- Diagnosis Result -->
+            <div id="diagnosisResult" class="diagnosis-result">
+                <h2 style="margin-bottom: 20px;">Diagnosis Complete</h2>
+                <div id="severityBadge" class="severity-badge"></div>
+                <h3 style="margin: 20px 0;">🔍 Diagnosis:</h3>
+                <p id="diagnosisText" style="font-size: 1.2em; color: #333; margin-bottom: 30px;"></p>
+                <h3 style="margin: 20px 0;">💡 Recommended Solution:</h3>
+                <div id="solutionText" class="solution-box"></div>
+                <div class="btn-container">
+                    <button class="btn" onclick="location.reload()">Start New Diagnosis</button>
+                    <a href="/history"><button class="btn btn-secondary">View History</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentCategory = '';
+        let currentQuestionIndex = 0;
+        let userAnswers = {};
+        let questions = [];
+
+        const questionFlows = {
+            power_boot: [
+                {
+                    key: 'power_status',
+                    question: 'What is the power status?',
+                    options: [
+                        { text: 'Computer won\'t turn on at all', value: 'not_turning_on', next: 'power_cable' },
+                        { text: 'Computer turns on but won\'t boot', value: 'turning_on', next: 'boot_stage' },
+                        { text: 'Computer shows BIOS then stops', value: 'turning_on', next: 'boot_stage' }
+                    ]
+                },
+                {
+                    key: 'power_cable',
+                    question: 'Is the power cable connected properly?',
+                    condition: { power_status: 'not_turning_on' },
+                    options: [
+                        { text: 'Yes', value: 'connected', next: 'outlet_working' },
+                        { text: 'No', value: 'disconnected', next: 'end' }
+                    ]
+                },
+                {
+                    key: 'outlet_working',
+                    question: 'Is the power outlet working? (Test with another device)',
+                    condition: { power_cable: 'connected' },
+                    options: [
+                        { text: 'Yes', value: 'yes', next: 'lights' },
+                        { text: 'No', value: 'no', next: 'end' }
+                    ]
+                },
+                {
+                    key: 'lights',
+                    question: 'When you press the power button, do any lights turn on?',
+                    condition: { outlet_working: 'yes' },
+                    options: [
+                        { text: 'No lights at all', value: 'none', next: 'end' },
+                        { text: 'Lights turn on', value: 'on', next: 'display' },
+                        { text: 'Fans spin but no display', value: 'on', next: 'display' }
+                    ]
+                },
+                {
+                    key: 'display',
+                    question: 'Is there any display on the monitor?',
+                    condition: { lights: 'on' },
+                    options: [
+                        { text: 'No signal', value: 'no_signal', next: 'end' },
+                        { text: 'Shows something', value: 'showing', next: 'end' }
+                    ]
+                },
+                {
+                    key: 'boot_stage',
+                    question: 'What stage does it reach?',
+                    condition: { power_status: 'turning_on' },
+                    options: [
+                        { text: 'No BIOS screen', value: 'no_bios', next: 'end' },
+                        { text: 'BIOS shows then stops', value: 'bios_shows', next: 'beep_code' },
+                        { text: 'Searching for boot device', value: 'bios_shows', next: 'boot_device' }
+                    ]
+                },
+                {
+                    key: 'beep_code',
+                    question: 'Do you hear any beep codes?',
+                    condition: { boot_stage: 'bios_shows' },
+                    options: [
+                        { text: 'No beeps', value: 'none', next: 'end' },
+                        { text: '1 long, 2 short beeps', value: '1_long_2_short', next: 'end' },
+                        { text: 'Continuous beeping', value: 'continuous', next: 'end' }
+                    ]
+                },
+                {
+                    key: 'boot_device',
+                    question: 'Boot device status?',
+                    options: [
+                        { text: 'Boot device not found', value: 'not_found', next: 'end' },
+                        { text: 'Boot device found', value: 'found', next: 'end' }
+                    ]
+                }
+            ],
+            performance: [
+                {
+                    key: 'issue_category',
+                    value: 'performance',
+                    hidden: true
+                },
+                {
+                    key: 'symptom',
+                    question: 'What performance issue are you experiencing?',
+                    options: [
+                        { text: 'Very slow performance', value: 'very_slow', next: 'disk_type' },
+                        { text: 'Computer freezing/hanging', value: 'freezing', next: 'end' },
+                        { text: 'Random shutdowns', value: 'shutdowns', next: 'end' },
+                        { text: 'Overheating', value: 'overheating', next: 'temperature' }
+                    ]
+                },
+                {
+                    key: 'disk_type',
+                    question: 'What type of drive do you have?',
+                    condition: { symptom: 'very_slow' },
+                    options: [
+                        { text: 'HDD (Hard Disk)', value: 'hdd', next: 'disk_health' },
+                        { text: 'SSD (Solid State)', value: 'ssd', next: 'cpu_usage' },
+                        { text: 'Don\'t know', value: 'unknown', next: 'cpu_usage' }
+                    ]
+                },
+                {
+                    key: 'disk_health',
+                    question: 'Have you checked disk health? Any warnings?',
+                    condition: { disk_type: 'hdd' },
+                    options: [
+                        { text: 'Yes, shows warnings', value: 'poor', next: 'end' },
+                        { text: 'No warnings', value: 'good', next: 'cpu_usage' },
+                        { text: 'Haven\'t checked', value: 'unknown', next: 'cpu_usage' }
+                    ]
+                },
+                {
+                    key: 'cpu_usage',
+                    question: 'Check Task Manager - Is CPU usage constantly high (>80%)?',
+                    options: [
+                        { text: 'Yes', value: 'high', next: 'process' },
+                        { text: 'No', value: 'normal', next: 'ram_usage' }
+                    ]
+                },
+                {
+                    key: 'process',
+                    question: 'Can you identify which program is using CPU?',
+                    condition: { cpu_usage: 'high' },
+                    options: [
+                        { text: 'Yes, I know the program', value: 'known', next: 'end' },
+                        { text: 'No, unknown process', value: 'unknown', next: 'end' },
+                        { text: 'Multiple processes', value: 'multiple', next: 'end' }
+                    ]
+                },
+                {
+                    key: 'ram_usage',
+                    question: 'Check Task Manager - Memory (RAM) usage high?',
+                    options: [
+                        { text: 'Yes, >80%', value: 'high', next: 'available_ram' },
+                        { text: 'No, <50%', value: 'normal', next: 'end' }
+                    ]
+                },
+                {
+                    key: 'available_ram',
+                    question: 'How much RAM do you have?',
+                    condition: { ram_usage: 'high' },
+                    options: [
+                        { text: '4GB or less', value: 'low', next: 'end' },
+                        { text: '8GB', value: 'low', next: 'end' },
+                        { text: '16GB or more', value: 'sufficient', next: 'end' }
+                    ]
+                },
+                {
+                    key: 'temperature',
+                    question: 'Temperature status?',
+                    condition: { symptom: 'overheating' },
+                    options: [
+                        { text: 'Very high', value: 'very_high', next: 'end' },
+                        { text: 'Normal', value: 'normal', next: 'end' }
+                    ]
+                }
+            ],
+            bsod: [
+                {
+                    key: 'issue_category',
+                    value: 'bsod',
+                    hidden: true
+                },
+                {
+                    key: 'error_code',
+                    question: 'What error code does the blue screen show?',
+                    options: [
+                        { text: 'DRIVER_IRQL_NOT_LESS_OR_EQUAL', value: 'DRIVER_IRQL_NOT_LESS_OR_EQUAL', next: 'end' },
+                        { text: 'MEMORY_MANAGEMENT', value: 'MEMORY_MANAGEMENT', next: 'end' },
+                        { text: 'KERNEL_DATA_INPAGE_ERROR', value: 'KERNEL_DATA_INPAGE_ERROR', next: 'end' },
+                        { text: 'SYSTEM_SERVICE_EXCEPTION', value: 'SYSTEM_SERVICE_EXCEPTION', next: 'end' },
+                        { text: 'PAGE_FAULT_IN_NONPAGED_AREA', value: 'PAGE_FAULT_IN_NONPAGED_AREA', next: 'end' },
+                        { text: 'Other/Don\'t know', value: 'unknown', next: 'end' }
+                    ]
+                }
+            ],
+            network: [
+                {
+                    key: 'issue_category',
+                    value: 'network',
+                    hidden: true
+                },
+                {
+                    key: 'symptom',
+                    question: 'What is the network problem?',
+                    options: [
+                        { text: 'No internet connection', value: 'no_internet', next: 'other_devices' },
+                        { text: 'Very slow internet', value: 'slow_internet', next: 'connection' },
+                        { text: 'Can\'t connect to WiFi', value: 'cannot_connect', next: 'connection_wifi' },
+                        { text: 'Intermittent connection (keeps dropping)', value: 'intermittent', next: 'end' },
+                        { text: 'Connected but no access', value: 'no_access', next: 'dns_test' }
+                    ]
+                },
+                {
+                    key: 'other_devices',
+                    question: 'Are other devices (phone/tablet) working on same network?',
+                    condition: { symptom: 'no_internet' },
+                    options: [
+                        { text: 'Yes, they work', value: 'working', next: 'end' },
+                        { text: 'No, nothing works', value: 'not_working', next: 'end' }
+                    ]
+                },
+                {
+                    key: 'connection',
+                    question: 'Are you using WiFi or Ethernet cable?',
+                    condition: { symptom: 'slow_internet' },
+                    options: [
+                        { text: 'WiFi', value: 'wifi', next: 'signal' },
+                        { text: 'Ethernet', value: 'ethernet', next: 'end' }
+                    ]
+                },
+                {
+                    key: 'signal',
+                    question: 'Is WiFi signal strength good?',
+                    condition: { connection: 'wifi' },
+                    options: [
+                        { text: 'Weak signal (1-2 bars)', value: 'weak', next: 'end' },
+                        { text: 'Good signal (3-4 bars)', value: 'good', next: 'end' }
+                    ]
+                },
+                {
+                    key: 'connection_wifi',
+                    value: 'wifi',
+                    hidden: true
+                },
+                {
+                    key: 'network_visible',
+                    question: 'Can you see your WiFi network in the list?',
+                    condition: { symptom: 'cannot_connect' },
+                    options: [
+                        { text: 'Yes', value: 'yes', next: 'end' },
+                        { text: 'No', value: 'no', next: 'end' }
+                    ]
+                },
+                {
+                    key: 'dns_test',
+                    question: 'Can you open websites if you type IP address like 8.8.8.8?',
+                    condition: { symptom: 'no_access' },
+                    options: [
+                        { text: 'Yes, IP works', value: 'ip_works', next: 'dns_working' },
+                        { text: 'No, nothing works', value: 'nothing', next: 'end' }
+                    ]
+                },
+                {
+                    key: 'dns_working',
+                    value: 'no',
+                    hidden: true
+                },
+                {
+                    key: 'can_ping_ip',
+                    value: 'yes',
+                    hidden: true
+                }
+            ],
+            application: [
+                {
+                    key: 'issue_category',
+                    value: 'application',
+                    hidden: true
+                },
+                {
+                    key: 'symptom',
+                    question: 'What is the application problem?',
+                    options: [
+                        { text: 'Programs crash frequently', value: 'crashes', next: 'which_apps' },
+                        { text: 'Can\'t install software', value: 'wont_install', next: 'end' },
+                        { text: 'Program won\'t start', value: 'wont_start', next: 'end' }
+                    ]
+                },
+                {
+                    key: 'which_apps',
+                    question: 'Which programs crash?',
+                    condition: { symptom: 'crashes' },
+                    options: [
+                        { text: 'One specific program', value: 'specific', next: 'end' },
+                        { text: 'Multiple/all programs', value: 'all', next: 'end' }
+                    ]
+                }
+            ],
+            peripheral: [
+                {
+                    key: 'issue_category',
+                    value: 'peripheral',
+                    hidden: true
+                },
+                {
+                    key: 'device',
+                    question: 'Which device has a problem?',
+                    options: [
+                        { text: 'Printer', value: 'printer', next: 'printer_symptom' },
+                        { text: 'USB Device (flash drive, external HDD)', value: 'usb', next: 'usb_symptom' },
+                        { text: 'Keyboard/Mouse', value: 'keyboard_mouse', next: 'kb_connection' }
+                    ]
+                },
+                {
+                    key: 'symptom',
+                    question: 'What is the printer issue?',
+                    condition: { device: 'printer' },
+                    options: [
+                        { text: 'Not detected/found', value: 'not_detected', next: 'end' },
+                        { text: 'Print queue stuck', value: 'queue_stuck', next: 'end' },
+                        { text: 'Poor print quality', value: 'poor_quality', next: 'end' }
+                    ]
+                },
+                {
+                    key: 'symptom',
+                    question: 'What is the USB issue?',
+                    condition: { device: 'usb' },
+                    options: [
+                        { text: 'Not recognized/detected', value: 'not_recognized', next: 'end' },
+                        { text: 'Keeps disconnecting', value: 'keeps_disconnecting', next: 'end' },
+                        { text: 'Very slow', value: 'slow', next: 'end' }
+                    ]
+                },
+                {
+                    key: 'connection',
+                    question: 'Is it wired or wireless?',
+                    condition: { device: 'keyboard_mouse' },
+                    options: [
+                        { text: 'Wired (USB)', value: 'wired', next: 'end' },
+                        { text: 'Wireless', value: 'wireless', next: 'end' }
+                    ]
+                },
+                {
+                    key: 'symptom',
+                    value: 'not_working',
+                    hidden: true
+                }
+            ],
+            audio: [
+                {
+                    key: 'issue_category',
+                    value: 'audio',
+                    hidden: true
+                },
+                {
+                    key: 'symptom',
+                    question: 'What is the audio problem?',
+                    options: [
+                        { text: 'No sound at all', value: 'no_sound', next: 'device_detected' },
+                        { text: 'Crackling/distorted sound', value: 'crackling', next: 'end' },
+                        { text: 'Sound from wrong device', value: 'wrong_device', next: 'end' }
+                    ]
+                },
+                {
+                    key: 'device_detected',
+                    question: 'Is audio device shown in Sound settings?',
+                    condition: { symptom: 'no_sound' },
+                    options: [
+                        { text: 'Yes, I see it', value: 'yes', next: 'muted' },
+                        { text: 'No, not listed', value: 'no', next: 'end' }
+                    ]
+                },
+                {
+                    key: 'muted',
+                    question: 'Is it muted or volume at 0?',
+                    condition: { device_detected: 'yes' },
+                    options: [
+                        { text: 'No, volume is up', value: 'no', next: 'end' },
+                        { text: 'Yes, was muted', value: 'yes', next: 'end' }
+                    ]
+                }
+            ],
+            security: [
+                {
+                    key: 'issue_category',
+                    value: 'security',
+                    hidden: true
+                },
+                {
+                    key: 'symptom',
+                    question: 'What security concern do you have?',
+                    options: [
+                        { text: 'Suspected malware/virus', value: 'malware_suspected', next: 'signs_malware' },
+                        { text: 'Pop-up ads everywhere', value: 'malware_suspected', next: 'signs_popup' },
+                        { text: 'Browser redirects to strange sites', value: 'malware_suspected', next: 'signs_redirect' },
+                        { text: 'Files encrypted (ransomware)', value: 'ransomware', next: 'end' },
+                        { text: 'Unknown programs running', value: 'malware_suspected', next: 'signs_programs' }
+                    ]
+                },
+                {
+                    key: 'signs',
+                    value: 'popup_ads',
+                    hidden: true,
+                    condition: { symptom: 'malware_suspected' }
+                }
+            ],
+            storage: [
+                {
+                    key: 'issue_category',
+                    value: 'storage',
+                    hidden: true
+                },
+                {
+                    key: 'symptom',
+                    question: 'What is the storage problem?',
+                    options: [
+                        { text: 'Disk full/low space', value: 'disk_full', next: 'end' },
+                        { text: 'External drive not showing', value: 'external_not_showing', next: 'end' },
+                        { text: 'Drive errors/warnings', value: 'drive_errors', next: 'end' },
+                        { text: 'Very slow drive', value: 'slow_drive', next: 'end' }
+                    ]
+                }
+            ],
+            windows_update: [
+                {
+                    key: 'issue_category',
+                    value: 'windows_update',
+                    hidden: true
+                },
+                {
+                    key: 'symptom',
+                    question: 'What is the Windows Update problem?',
+                    options: [
+                        { text: 'Update keeps failing', value: 'update_failing', next: 'end' },
+                        { text: 'Update stuck/frozen', value: 'update_stuck', next: 'end' },
+                        { text: 'Update taking too long', value: 'update_stuck', next: 'end' }
+                    ]
+                }
+            ],
+            display: [
+                {
+                    key: 'issue_category',
+                    value: 'display',
+                    hidden: true
+                },
+                {
+                    key: 'symptom',
+                    question: 'What is the display problem?',
+                    options: [
+                        { text: 'No display/black screen', value: 'no_display', next: 'power_on' },
+                        { text: 'Screen flickering', value: 'flickering', next: 'end' },
+                        { text: 'Wrong resolution', value: 'wrong_resolution', next: 'end' },
+                        { text: 'Display colors wrong', value: 'colors_wrong', next: 'end' }
+                    ]
+                },
+                {
+                    key: 'power_on',
+                    question: 'Is the computer powered on (lights/fans)?',
+                    condition: { symptom: 'no_display' },
+                    options: [
+                        { text: 'Yes', value: 'yes', next: 'end' },
+                        { text: 'No', value: 'no', next: 'end' }
+                    ]
+                }
+            ]
+        };
+
+        function startDiagnosis() {
+            document.getElementById('welcomeSection').style.display = 'none';
+            document.getElementById('progressSection').style.display = 'block';
+            document.getElementById('categorySection').classList.add('active');
+            updateProgress();
+        }
+
+        function selectCategory(category) {
+            currentCategory = category;
+            questions = questionFlows[category] || [];
+            currentQuestionIndex = 0;
+            userAnswers = {};
+            
+            document.getElementById('categorySection').classList.remove('active');
+            showNextQuestion();
+        }
+
+        function showNextQuestion() {
+            if (currentQuestionIndex >= questions.length) {
+                submitDiagnosis();
+                return;
+            }
+
+            const question = questions[currentQuestionIndex];
+            
+            // Check if question has condition
+            if (question.condition) {
+                let conditionMet = true;
+                for (let key in question.condition) {
+                    if (userAnswers[key] !== question.condition[key]) {
+                        conditionMet = false;
+                        break;
+                    }
+                }
+                
+                if (!conditionMet) {
+                    currentQuestionIndex++;
+                    showNextQuestion();
+                    return;
+                }
+            }
+
+            // Handle hidden questions (auto-set values)
+            if (question.hidden) {
+                userAnswers[question.key] = question.value;
+                currentQuestionIndex++;
+                showNextQuestion();
+                return;
+            }
+
+            updateProgress();
+            displayQuestion(question);
+        }
+
+        function displayQuestion(question) {
+            const container = document.getElementById('dynamicQuestions');
+            container.innerHTML = '';
+            
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'question';
+            
+            const title = document.createElement('h3');
+            title.textContent = question.question;
+            questionDiv.appendChild(title);
+            
+            const optionsDiv = document.createElement('div');
+            optionsDiv.className = 'options';
+            
+            question.options.forEach(option => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                optionDiv.textContent = option.text;
+                optionDiv.onclick = () => selectAnswer(question.key, option.value, option.next);
+                optionsDiv.appendChild(optionDiv);
+            });
+            
+            questionDiv.appendChild(optionsDiv);
+            
+            // Add navigation buttons
+            const navDiv = document.createElement('div');
+            navDiv.className = 'nav-buttons';
+            
+            if (currentQuestionIndex > 0) {
+                const backBtn = document.createElement('button');
+                backBtn.className = 'btn btn-secondary';
+                backBtn.textContent = '← Back';
+                backBtn.onclick = goBack;
+                navDiv.appendChild(backBtn);
+            } else {
+                navDiv.appendChild(document.createElement('div'));
+            }
+            
+            questionDiv.appendChild(navDiv);
+            container.appendChild(questionDiv);
+            container.classList.add('active');
+        }
+
+        function selectAnswer(key, value, next) {
+            userAnswers[key] = value;
+            
+            if (next === 'end') {
+                submitDiagnosis();
+            } else {
+                currentQuestionIndex++;
+                showNextQuestion();
+            }
+        }
+
+        function goBack() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                
+                // Remove last answer
+                const lastQuestion = questions[currentQuestionIndex];
+                if (lastQuestion && !lastQuestion.hidden) {
+                    delete userAnswers[lastQuestion.key];
+                }
+                
+                showNextQuestion();
+            }
+        }
+
+        function updateProgress() {
+            const totalQuestions = questions.filter(q => !q.hidden).length;
+            const answeredQuestions = currentQuestionIndex;
+            const percentage = totalQuestions > 0 ? (answeredQuestions / totalQuestions) * 100 : 0;
+            document.getElementById('progressFill').style.width = percentage + '%';
+        }
+
+        async function submitDiagnosis() {
+            document.getElementById('dynamicQuestions').classList.remove('active');
+            document.getElementById('loading').classList.add('active');
+            
+            try {
+                const response = await fetch('/diagnose', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        category: currentCategory,
+                        answers: userAnswers
+                    })
+                });
+                
+                const result = await response.json();
+                
+                setTimeout(() => {
+                    document.getElementById('loading').classList.remove('active');
+                    displayResult(result);
+                }, 1000);
+                
+            } catch (error) {
+                alert('Error: ' + error.message);
+                document.getElementById('loading').classList.remove('active');
+            }
+        }
+
+        function displayResult(result) {
+            document.getElementById('progressFill').style.width = '100%';
+            
+            const severityMap = {
+                'critical': { class: 'severity-critical', text: '🔴 CRITICAL - URGENT ACTION REQUIRED' },
+                'high': { class: 'severity-high', text: '🟠 HIGH - Address Soon' },
+                'medium': { class: 'severity-medium', text: '🟡 MEDIUM - Should Fix' },
+                'low': { class: 'severity-low', text: '🟢 LOW - Minor Issue' }
+            };
+            
+            const severity = severityMap[result.severity] || severityMap['low'];
+            
+            document.getElementById('severityBadge').className = 'severity-badge ' + severity.class;
+            document.getElementById('severityBadge').textContent = severity.text;
+            document.getElementById('diagnosisText').textContent = result.diagnosis;
+            document.getElementById('solutionText').textContent = result.solution;
+            
+            document.getElementById('diagnosisResult').classList.add('active');
+        }
+    </script>
+</body>
+</html>

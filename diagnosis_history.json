@@ -203,5 +203,131 @@
       "symptom": "no_internet",
       "other_devices": "not_working"
     }
+  },
+  {
+    "timestamp": "2025-10-27T11:37:10.762945",
+    "diagnosis": "Power Supply Unit (PSU) Failure",
+    "solution": "1. Check if PSU fan spins\n2. Test with PSU tester\n3. Replace PSU if confirmed dead\n4. Check power button connection to motherboard\n5. Verify PSU switch is ON",
+    "severity": "high",
+    "facts": {
+      "power_status": "not_turning_on",
+      "power_cable": "connected",
+      "outlet_working": "yes",
+      "lights": "none"
+    }
+  },
+  {
+    "timestamp": "2025-10-27T12:22:14.919923",
+    "diagnosis": "Power Supply Unit (PSU) Failure",
+    "solution": "1. Check if PSU fan spins\n2. Test with PSU tester\n3. Replace PSU if confirmed dead\n4. Check power button connection to motherboard\n5. Verify PSU switch is ON",
+    "severity": "high",
+    "facts": {
+      "power_status": "not_turning_on",
+      "power_cable": "connected",
+      "outlet_working": "yes",
+      "lights": "none"
+    }
+  },
+  {
+    "timestamp": "2025-10-27T12:23:10.631794",
+    "diagnosis": "General Computer Issue - Basic Troubleshooting",
+    "solution": "1. Restart computer\n2. Check all physical connections\n3. Run Windows Update\n4. Update all drivers\n5. Run antivirus scan\n6. Check Event Viewer for errors\n7. Run SFC /scannow\n8. Check Task Manager for resource usage\n9. Clean temp files\n10. Check for overheating",
+    "severity": "low",
+    "facts": {
+      "power_status": "not_turning_on",
+      "power_cable": "connected",
+      "outlet_working": "no"
+    }
+  },
+  {
+    "timestamp": "2025-10-27T12:24:49.795348",
+    "diagnosis": "Power Supply Unit (PSU) Failure",
+    "solution": "1. Check if PSU fan spins\n2. Test with PSU tester\n3. Replace PSU if confirmed dead\n4. Check power button connection to motherboard\n5. Verify PSU switch is ON",
+    "severity": "high",
+    "facts": {
+      "power_status": "not_turning_on",
+      "power_cable": "connected",
+      "outlet_working": "yes",
+      "lights": "none"
+    }
+  },
+  {
+    "timestamp": "2025-10-27T14:08:56.072218",
+    "diagnosis": "Power Supply Unit (PSU) Failure",
+    "solution": "1. Check if PSU fan spins\n2. Test with PSU tester\n3. Replace PSU if confirmed dead\n4. Check power button connection to motherboard\n5. Verify PSU switch is ON",
+    "severity": "high",
+    "facts": {
+      "power_status": "not_turning_on",
+      "power_cable": "connected",
+      "outlet_working": "yes",
+      "lights": "none"
+    }
+  },
+  {
+    "timestamp": "2025-10-27T14:40:55.298327",
+    "diagnosis": "RAM Failure",
+    "solution": "1. Remove all RAM sticks\n2. Install one stick at a time\n3. Try each slot individually\n4. Clean RAM contacts with eraser\n5. Test RAM with MemTest86\n6. Try known-good RAM\n7. Check motherboard RAM slots for damage",
+    "severity": "medium",
+    "facts": {
+      "power_status": "turning_on",
+      "boot_stage": "bios_shows",
+      "beep_code": "continuous"
+    }
+  },
+  {
+    "timestamp": "2025-10-27T15:09:02.037148",
+    "diagnosis": "General Computer Issue - Basic Troubleshooting",
+    "solution": "1. Restart computer\n2. Check all physical connections\n3. Run Windows Update\n4. Update all drivers\n5. Run antivirus scan\n6. Check Event Viewer for errors\n7. Run SFC /scannow\n8. Check Task Manager for resource usage\n9. Clean temp files\n10. Check for overheating",
+    "severity": "low",
+    "facts": {
+      "power_status": "not_turning_on",
+      "power_cable": "disconnected"
+    }
+  },
+  {
+    "timestamp": "2025-10-27T16:19:12.747107",
+    "diagnosis": "Power Supply Unit (PSU) Failure",
+    "solution": "1. Check if PSU fan spins\n2. Test with PSU tester\n3. Replace PSU if confirmed dead\n4. Check power button connection to motherboard\n5. Verify PSU switch is ON",
+    "severity": "high",
+    "facts": {
+      "power_status": "not_turning_on",
+      "power_cable": "connected",
+      "outlet_working": "yes",
+      "lights": "none"
+    }
+  },
+  {
+    "timestamp": "2025-10-27T18:23:16.499818",
+    "diagnosis": "General Computer Issue - Basic Troubleshooting",
+    "solution": "1. Restart computer\n2. Check all physical connections\n3. Run Windows Update\n4. Update all drivers\n5. Run antivirus scan\n6. Check Event Viewer for errors\n7. Run SFC /scannow\n8. Check Task Manager for resource usage\n9. Clean temp files\n10. Check for overheating",
+    "severity": "low",
+    "facts": {
+      "power_status": "not_turning_on",
+      "power_cable": "connected",
+      "outlet_working": "yes",
+      "lights": "on",
+      "display": "showing"
+    }
+  },
+  {
+    "timestamp": "2025-10-27T18:45:20.810487",
+    "diagnosis": "General Computer Issue - Basic Troubleshooting",
+    "solution": "1. Restart computer\n2. Check all physical connections\n3. Run Windows Update\n4. Update all drivers\n5. Run antivirus scan\n6. Check Event Viewer for errors\n7. Run SFC /scannow\n8. Check Task Manager for resource usage\n9. Clean temp files\n10. Check for overheating",
+    "severity": "low",
+    "facts": {
+      "power_status": "not_turning_on",
+      "power_cable": "connected",
+      "outlet_working": "no"
+    }
+  },
+  {
+    "timestamp": "2025-10-27T19:58:02.175421",
+    "diagnosis": "General Computer Issue - Basic Troubleshooting",
+    "solution": "1. Restart computer\n2. Check all physical connections\n3. Run Windows Update\n4. Update all drivers\n5. Run antivirus scan\n6. Check Event Viewer for errors\n7. Run SFC /scannow\n8. Check Task Manager for resource usage\n9. Clean temp files\n10. Check for overheating",
+    "severity": "low",
+    "facts": {
+      "power_status": "not_turning_on",
+      "power_cable": "disconnected"
+    }
   }
 ]

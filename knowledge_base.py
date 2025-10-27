@@ -56,6 +56,7 @@ class ComputerDiagnosisSystem(KnowledgeEngine):
     
     @Rule(Fact(action='diagnose'),
           Fact(power_status="turning_on"),
+          
           Fact(boot_stage="no_bios"))
     def diagnose_motherboard_cpu(self):
         self.diagnosis_result = {
