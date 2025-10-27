@@ -329,5 +329,86 @@
       "power_status": "not_turning_on",
       "power_cable": "disconnected"
     }
+  },
+  {
+    "timestamp": "2025-10-27T20:33:39.160576",
+    "diagnosis": "General Computer Issue - Basic Troubleshooting",
+    "solution": "1. Restart computer\n2. Check all physical connections\n3. Run Windows Update\n4. Update all drivers\n5. Run antivirus scan\n6. Check Event Viewer for errors\n7. Run SFC /scannow\n8. Check Task Manager for resource usage\n9. Clean temp files\n10. Check for overheating",
+    "severity": "low",
+    "facts": {
+      "issue_category": "storage",
+      "symptom": "slow_drive"
+    }
+  },
+  {
+    "timestamp": "2025-10-27T20:34:03.024225",
+    "diagnosis": "General Computer Issue - Basic Troubleshooting",
+    "solution": "1. Restart computer\n2. Check all physical connections\n3. Run Windows Update\n4. Update all drivers\n5. Run antivirus scan\n6. Check Event Viewer for errors\n7. Run SFC /scannow\n8. Check Task Manager for resource usage\n9. Clean temp files\n10. Check for overheating",
+    "severity": "low",
+    "facts": {
+      "issue_category": "display",
+      "symptom": "wrong_resolution"
+    }
+  },
+  {
+    "timestamp": "2025-10-27T20:34:13.273366",
+    "diagnosis": "General Computer Issue - Basic Troubleshooting",
+    "solution": "1. Restart computer\n2. Check all physical connections\n3. Run Windows Update\n4. Update all drivers\n5. Run antivirus scan\n6. Check Event Viewer for errors\n7. Run SFC /scannow\n8. Check Task Manager for resource usage\n9. Clean temp files\n10. Check for overheating",
+    "severity": "low",
+    "facts": {
+      "issue_category": "performance",
+      "symptom": "shutdowns"
+    }
+  },
+  {
+    "timestamp": "2025-10-27T20:35:17.025495",
+    "diagnosis": "Motherboard or CPU Failure",
+    "solution": "1. Reset CMOS (remove battery for 5 mins)\n2. Remove all unnecessary components\n3. Check for bent CPU pins\n4. Test with minimal hardware (CPU, 1 RAM, PSU)\n5. Check motherboard for burn marks\n6. Verify CPU cooler is properly mounted",
+    "severity": "critical",
+    "facts": {
+      "power_status": "turning_on",
+      "boot_stage": "no_bios"
+    }
+  },
+  {
+    "timestamp": "2025-10-27T20:35:27.463889",
+    "diagnosis": "Driver Conflict (DRIVER_IRQL)",
+    "solution": "1. Boot into Safe Mode\n2. Update all drivers (especially network/GPU)\n3. Rollback recently installed drivers\n4. Use Driver Verifier to find bad driver\n5. Check Windows Update\n6. Uninstall recent software\n7. Run SFC /scannow",
+    "severity": "high",
+    "facts": {
+      "issue_category": "bsod",
+      "error_code": "DRIVER_IRQL_NOT_LESS_OR_EQUAL"
+    }
+  },
+  {
+    "timestamp": "2025-10-27T20:35:39.803894",
+    "diagnosis": "Router or ISP Problem",
+    "solution": "1. Power cycle modem and router (30 sec off)\n2. Check all cable connections\n3. Verify ISP service status online\n4. Check router admin panel for issues\n5. Try direct modem connection\n6. Reset router to factory settings (last resort)\n7. Contact ISP if problem persists",
+    "severity": "medium",
+    "facts": {
+      "issue_category": "network",
+      "symptom": "no_internet",
+      "other_devices": "not_working"
+    }
+  },
+  {
+    "timestamp": "2025-10-27T20:35:52.781208",
+    "diagnosis": "Ransomware Attack",
+    "solution": "CRITICAL RESPONSE:\n1. IMMEDIATELY disconnect from network\n2. DO NOT pay ransom\n3. DO NOT delete encrypted files\n4. Take photo of ransom note\n5. Report to law enforcement\n6. Identify ransomware type (ID Ransomware website)\n7. Check if decryption tool exists\n8. Restore from backup if available\n9. Seek professional cybersecurity help\n10. Rebuild system from clean install",
+    "severity": "critical",
+    "facts": {
+      "issue_category": "security",
+      "symptom": "ransomware"
+    }
+  },
+  {
+    "timestamp": "2025-10-27T20:36:02.010714",
+    "diagnosis": "Windows Update Stuck",
+    "solution": "1. Wait at least 2-3 hours (can take very long)\n2. Check if HDD light is blinking (still working)\n3. If truly frozen (4+ hours, no disk activity):\n   - Force restart (hold power button)\n4. Boot into Safe Mode\n5. Run Update Troubleshooter\n6. Clear update cache\n7. Try again or use Media Creation Tool\n8. For major updates, use Update Assistant",
+    "severity": "medium",
+    "facts": {
+      "issue_category": "windows_update",
+      "symptom": "update_stuck"
+    }
   }
 ]
